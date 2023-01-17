@@ -19,7 +19,7 @@ public class MemberServiceV3_3 {
     }
 
     //서비스 계층
-    @Transactional
+    @Transactional //테스트 시작 전에 트랜잭션 시작! 테스트 완료 후 항상 롤백! (DB에 데이터 안 남음)
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
         bizLogic(fromId, toId, money); //비지니스 로직
     }
