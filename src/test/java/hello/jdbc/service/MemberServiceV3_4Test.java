@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * 트랜잭션 - DataSource, transactionManager 자동 등록
  */
 @Slf4j
-@SpringBootTest
+@SpringBootTest //스프링 컨테이너와 테스트를 함께 실행
 class MemberServiceV3_4Test {
     public static final String MEMBER_A = "memberA";
     public static final String MEMBER_B = "memberB";
@@ -32,7 +32,7 @@ class MemberServiceV3_4Test {
     @Autowired
     private MemberServiceV3_3 memberService;
 
-    @TestConfiguration
+    @TestConfiguration //테스트 안에서 내부 설정 클래스를 만들어서 사용할 때 사용! @Bean을 추가로 등록시켜줌
     static class TestConfig {
         @Autowired
         private DataSource dataSource;
