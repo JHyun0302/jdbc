@@ -12,7 +12,7 @@ public class MemberServiceV1 {
 
     //서비스 계층
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
-        //시작
+        //트랜잭션 시작
         Member fromMember = memberRepository.findById(fromId);
         Member toMember = memberRepository.findById(toId);
 
