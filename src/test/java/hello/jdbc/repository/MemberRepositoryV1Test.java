@@ -20,8 +20,10 @@ class MemberRepositoryV1Test {
 
     @BeforeEach
     void beforeEach() {
-        //기본 DriverManager - 항상 새로운 커넥션 획득
+        //기본 DriverManager - 항상 새로운 커넥션 획득 -> conn1, 2, 3, 4 ...
 //        DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
+
+        //커넥션 풀 사용 -> conn0만 사용: 사용 후 반납 사용 후 반납...
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setJdbcUrl(URL);
         dataSource.setUsername(USERNAME);
@@ -32,7 +34,7 @@ class MemberRepositoryV1Test {
     @Test
     void crud() throws SQLException, InterruptedException {
         //save
-        Member member = new Member("memberV170", 10000);
+        Member member = new Member("memberV10", 10000);
         repository.save(member);
 
         //findById
