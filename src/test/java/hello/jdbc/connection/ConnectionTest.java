@@ -17,17 +17,19 @@ import static hello.jdbc.connection.ConnectionConst.*;
 public class ConnectionTest {
     /**
      * DriverManager는 DataSource 인터페이스 사용 X -> 인터페이스 사용할려면 관련 코드 다 뜯어 고쳐야함
+     * DriverManger: 사용할 때마다 getConnection(URL, USERNAME, PASSWORD) 해야함!
      */
     @Test
     void driverManager() throws SQLException {
-        Connection con1 = DriverManager.getConnection(URL, USERNAME, PASSWORD); //설정 & 사용
+        Connection con1 = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         Connection con2 = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         log.info("connection= {}, class={}", con1, con1.getClass());
         log.info("connection= {}, class={}", con2, con2.getClass());
     }
 
     /**
-     * 스프링이 제공하는 DriverManagerDataSource는 DataSource 인터페이스 사용 O, 설정과 사용 분리
+     * 스프링이 제공하는 DriverManagerDataSource는 DataSource 인터페이스 사용 O
+     * DriverManagerDataSource: 설정과 사용 분리!
      */
     @Test
     void dataSourceDriverManager() throws SQLException {
@@ -58,6 +60,7 @@ public class ConnectionTest {
     private void useDataSource(DataSource dataSource) throws SQLException {
         Connection con1 = DriverManager.getConnection(URL, USERNAME, PASSWORD); //사용
         Connection con2 = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
         log.info("connection= {}, class={}", con1, con1.getClass());
         log.info("connection= {}, class={}", con2, con2.getClass());
     }
