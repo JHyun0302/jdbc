@@ -74,7 +74,7 @@ public class MemberRepositoryV0 {
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, money); //values(?, )
             pstmt.setString(2, memberId); //values( ,?)
-            int resultSize = pstmt.executeUpdate();
+            int resultSize = pstmt.executeUpdate(); //쿼리를 실행하고 영향받은 row 수
             log.info("resultSize={}", resultSize);
         } catch (SQLException e) {
             log.error("db error", e);
@@ -120,7 +120,7 @@ public class MemberRepositoryV0 {
 
         if (stmt != null) {
             try {
-                stmt.close(); //Exception 터지면?
+                stmt.close(); //Exception 터져도 catch로 잡기 때문에 con 닫을 수 있음
             } catch (SQLException e) {
                 log.info("error", e);
             }
