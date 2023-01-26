@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 /**
  * JdbcTemplate 사용
  * 반복적인 코드 삭제
+ * getConnection, CloseConnection 다 처리해줌!
  */
 @Slf4j
 public class MemberRepositoryV5 implements MemberRepository {
@@ -24,6 +25,9 @@ public class MemberRepositoryV5 implements MemberRepository {
     public Member save(Member member) {
         String sql = "insert into member(member_id, money) values (?, ?)";
         template.update(sql, member.getMemberId(), member.getMoney()); //반환값 = update된 row 개수
+        /**
+         * connection 연결하고 pstmt setting하고 ~ 예외변환까지 다 JdbcTemplate이 처리해줌
+         */
         return member;
     }
 
