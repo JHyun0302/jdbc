@@ -32,7 +32,7 @@ public class ExTranslatorV1Test {
     @Test
     void duplicateKeySave() {
         service.create("myId");
-        service.create("myId");
+        service.create("myId"); //같은 ID 저장 시도
     }
 
     @Slf4j
@@ -83,7 +83,7 @@ public class ExTranslatorV1Test {
                 pstmt.executeUpdate();
                 return member;
             } catch (SQLException e) {
-                //h2 db
+                //h2 db인 경우 duplicate key Error: 23505
                 if (e.getErrorCode() == 23505) {
                     throw new MyDuplicateKeyException(e);
                 }

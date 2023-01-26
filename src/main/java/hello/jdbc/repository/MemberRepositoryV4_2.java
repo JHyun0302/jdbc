@@ -13,6 +13,7 @@ import java.util.NoSuchElementException;
 
 /**
  * SQLExceptionTranslator 추가
+ * MyDbException처럼 사용자가 만든 exception으로 안 던져도 됨!
  */
 @Slf4j
 public class MemberRepositoryV4_2 implements MemberRepository {

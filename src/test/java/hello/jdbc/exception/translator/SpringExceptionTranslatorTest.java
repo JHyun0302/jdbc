@@ -45,7 +45,7 @@ public class SpringExceptionTranslatorTest {
      */
     @Test
     void exceptionTranslator() {
-        String sql = "select bad grammar";
+        String sql = "select bad grammar"; //문법 오류!!
         try {
             Connection con = dataSource.getConnection();
             PreparedStatement stmt = con.prepareStatement(sql);
