@@ -9,7 +9,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.sql.SQLException;
 
 /**
- * 트랜잭션 - 트랜잭션 템플릿
+ * 트랜잭션 - 트랜잭션 템플릿(TransactionTemplate): 반복되는 try...catch 내용 템플릿화
  */
 @Slf4j
 public class MemberServiceV3_2 {

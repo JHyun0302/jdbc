@@ -17,7 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * 트랜잭션 - 트랜잭션 매니저
+ * 트랜잭션 - 트랜잭션 템플릿(트랜잭션을 사용할 때 반복하는 코드 제거! - MemberServiceV3_2)
+ * 3_1Test 내용 같음!
  */
 class MemberServiceV3_2Test {
     public static final String MEMBER_A = "memberA";
