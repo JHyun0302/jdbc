@@ -69,12 +69,12 @@ class MemberServiceV2Test {
 
         //when
         assertThatThrownBy(() -> memberService.accountTransfer(memberA.getMemberId(), memberEx.getMemberId(), 2000))
-                .isInstanceOf(IllegalStateException.class);
+                .isInstanceOf(IllegalStateException.class); //con.rollback(); //실패시 롤백
 
         //then
         Member finMemberA = memberRepository.findById(memberA.getMemberId());
         Member finMemberB = memberRepository.findById(memberEx.getMemberId());
-        assertThat(finMemberA.getMoney()).isEqualTo(10000); //con.rollback(); //실패시 롤백
+        assertThat(finMemberA.getMoney()).isEqualTo(10000);
         assertThat(finMemberB.getMoney()).isEqualTo(10000);
     }
 }

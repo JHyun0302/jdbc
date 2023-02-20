@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.NoSuchElementException;
 
 /**
- * JDBC - ConnectionParam
+ * JDBC - Connection을 Parameter로 전달 -> 같은 커넥션 사용되도록 유지!
  */
 @Slf4j
 public class MemberRepositoryV2 {
@@ -70,6 +70,9 @@ public class MemberRepositoryV2 {
         }
     }
 
+    /**
+     * 파라미터로 Connection 넘겨줌 -> 같은 커넥션 유지
+     */
     public Member findById(Connection con, String memberId) throws SQLException {
         String sql = "select * from member where member_id = ?";
 
@@ -94,7 +97,7 @@ public class MemberRepositoryV2 {
             log.info("db error", e);
             throw e;
         } finally {
-            //connection은 여기서 닫지 않는다!!
+            //connection은 여기서 닫지 않는다!! - 서비스 로직이 끝날 때 커넥션 닫아야함!(계속 파라미터로 연결시켜서 같은 커넥션 이용)
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(pstmt);
 //            JdbcUtils.closeConnection(con);
@@ -122,6 +125,9 @@ public class MemberRepositoryV2 {
         }
     }
 
+    /**
+     * 파라미터로 Connection 넘겨줌 -> 같은 커넥션 유지
+     */
     public void update(Connection con, String memberId, int money) throws SQLException {
         String sql = "update member set money=? where member_id=?";
 
@@ -137,7 +143,7 @@ public class MemberRepositoryV2 {
             log.error("db error", e);
             throw e;
         } finally {
-            //connection은 여기서 닫지 않는다!!
+            //connection은 여기서 닫지 않는다!!  - 서비스 로직이 끝날 때 커넥션 닫아야함!(계속 파라미터로 연결시켜서 같은 커넥션 이용)
             JdbcUtils.closeStatement(pstmt);
 //            JdbcUtils.closeConnection(con);
         }
