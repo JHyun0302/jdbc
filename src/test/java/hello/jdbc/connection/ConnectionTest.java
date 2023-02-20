@@ -13,6 +13,9 @@ import java.sql.SQLException;
 
 import static hello.jdbc.connection.ConnectionConst.*;
 
+/**
+ * "DriverManager" 이용한 커넥션 획득
+ */
 @Slf4j
 public class ConnectionTest {
     /**
@@ -29,7 +32,7 @@ public class ConnectionTest {
 
     /**
      * 스프링이 제공하는 DriverManagerDataSource는 DataSource 인터페이스 사용 O
-     * DriverManagerDataSource: 설정과 사용 분리!
+     * DriverManagerDataSource: 설정과 사용 분리! (초기화 정보 딱 1번만 줌!!)
      */
     @Test
     void dataSourceDriverManager() throws SQLException {
@@ -39,7 +42,7 @@ public class ConnectionTest {
     }
 
     /**
-     * DataSource: HiKari 사용
+     * 커넥션 풀 사용: HiKariCP
      */
     @Test
     void dataSourceConnectionPool() throws SQLException, InterruptedException {
@@ -54,12 +57,12 @@ public class ConnectionTest {
 
 //        HikariDataSource dataSource = new HikariDataSource(hikariConfig);
         useDataSource(dataSource);
-        Thread.sleep(1000); //커넥션 풀에서 커넥션 생성 시간 대기
+        Thread.sleep(1000); //커넥션 풀에서 커넥션 생성 시간 대기 (log 보기)
     }
 
     private void useDataSource(DataSource dataSource) throws SQLException {
-        Connection con1 = DriverManager.getConnection(URL, USERNAME, PASSWORD); //사용
-        Connection con2 = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        Connection con1 = dataSource.getConnection(); //사용
+        Connection con2 = dataSource.getConnection();
 
         log.info("connection= {}, class={}", con1, con1.getClass());
         log.info("connection= {}, class={}", con2, con2.getClass());
