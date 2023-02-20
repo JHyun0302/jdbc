@@ -31,7 +31,7 @@ class MemberServiceV3_1Test {
     void before() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
         memberRepository = new MemberRepositoryV3(dataSource);
-        PlatformTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
+        PlatformTransactionManager transactionManager = new DataSourceTransactionManager(dataSource); //JDBC용 트랜잭션 매니저
         memberService = new MemberServiceV3_1(transactionManager, memberRepository);
     }
 
