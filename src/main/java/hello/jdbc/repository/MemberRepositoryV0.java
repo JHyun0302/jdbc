@@ -9,14 +9,15 @@ import java.util.NoSuchElementException;
 
 /**
  * JDBC - DriverManager 사용
+ * SQL mapper 사용 X
  */
 @Slf4j
 public class MemberRepositoryV0 {
     public Member save(Member member) throws SQLException {
         String sql = "insert into member(member_id, money) values (?, ?)";
 
-        Connection con = null;
-        PreparedStatement pstmt = null;
+        Connection con = null; //커넥션 얻기
+        PreparedStatement pstmt = null; //DB로 전달 할 SQL문 & 파라미터로 전달할 데이터 준비
 
         try {
             con = getConnection();
@@ -38,7 +39,7 @@ public class MemberRepositoryV0 {
 
         Connection con = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
+        ResultSet rs = null; // DB 내부에 커서를 이동해 데이터 조회 가능!
 
         try {
             con = getConnection();
@@ -47,7 +48,7 @@ public class MemberRepositoryV0 {
 
             rs = pstmt.executeQuery(); //데이터 조회
 
-            if (rs.next()) {
+            if (rs.next()) { //최초 1번은 실행해야 데이터가 있는 곳 가리킴!
                 Member member = new Member();
                 member.setMemberId(rs.getString("member_id"));
                 member.setMoney(rs.getInt("money"));
@@ -72,7 +73,7 @@ public class MemberRepositoryV0 {
         try {
             con = getConnection();
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, money); //values(?, )
+            pstmt.setInt(1, money); //value s(?, )
             pstmt.setString(2, memberId); //values( ,?)
             int resultSize = pstmt.executeUpdate(); //쿼리를 실행하고 영향받은 row 수
             log.info("resultSize={}", resultSize);
@@ -105,6 +106,10 @@ public class MemberRepositoryV0 {
         }
     }
 
+    /**
+     * 리소스 정리: 항상 역순
+     * connection 얻고 PreparedStatement 만들었기 때문에 역순으로 정리! (Statement - 부모, PreparedStatement - 자식)
+     */
     private void close(Connection con, Statement stmt, ResultSet rs) {
         /**
          * 핵심은 stmt와 con이 독립적인 관계여야함!
@@ -112,7 +117,7 @@ public class MemberRepositoryV0 {
          */
         if (rs != null) {
             try {
-                rs.close(); //Exception 터지면? catch에서 잡아주므로 rs에 영향 X
+                rs.close(); //Exception 터지면? catch에서 잡아주므로 stmt, con에 영향 X
             } catch (SQLException e) {
                 log.info("error", e);
             }
