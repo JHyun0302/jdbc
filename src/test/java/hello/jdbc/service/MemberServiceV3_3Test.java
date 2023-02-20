@@ -24,6 +24,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * 트랜잭션 - @Transactional AOP
+ * AOP 적용할려면 스프링 컨테이너 필요!
+ *
+ * @BeforeEach == TestConfig
  */
 @Slf4j
 @SpringBootTest
