@@ -20,6 +20,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * 트랜잭션 - DataSource, transactionManager 자동 등록
+ * application.properties 속성을 이용해 DataSource 자동 등록
+ * 스프링 부트: PlatformTransactionManager 자동으로 스프링 빈에 등록
  */
 @Slf4j
 @SpringBootTest //스프링 컨테이너와 테스트를 함께 실행
@@ -39,6 +41,7 @@ class MemberServiceV3_4Test {
 
         /*
         private final DataSource dataSource;
+
         TestConfig(DataSource dataSource) {
             this.dataSource = dataSource;
         }*/
