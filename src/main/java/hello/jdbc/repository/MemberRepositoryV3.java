@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.NoSuchElementException;
 
 /**
- * 트랜잭션 - 트랜잭션 매니저
+ * 트랜잭션 - 트랜잭션 매니저 -> 트랜잭션 동기화 매니저
  * DataSourceUtils.getConnection()
  * DataSourceUtils.releaseConnection()
  */
@@ -122,7 +122,7 @@ public class MemberRepositoryV3 {
     }
 
     private Connection getConnection() throws SQLException {
-        //주의! 트랙잭션 동기화를 사용하려면 DataSourceUtils를 사용해야 한다.
+        //주의! 트랙잭션 동기화를 사용하려면 DataSourceUtils를 사용해야 한다. (트랜잭션 매니저로 생성 후 트랜잭션 동기화 매니저에서 커넥션 얻음!)
         Connection con = DataSourceUtils.getConnection(dataSource);
         log.info("get connection={}, class={}", con, con.getClass());
         return con;
