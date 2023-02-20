@@ -8,6 +8,9 @@ import java.sql.SQLException;
 
 import static hello.jdbc.connection.ConnectionConst.*;
 
+/**
+ * JDBC를 사용해서 실제 DB에 연결
+ */
 @Slf4j
 public class DBConnectionUtil {
     public static Connection getConnection() {
