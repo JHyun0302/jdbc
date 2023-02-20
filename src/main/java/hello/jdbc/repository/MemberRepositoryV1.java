@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.NoSuchElementException;
 
 /**
- * JDBC - DataSource 사용, JdbcUtils 사용
+ * JDBC - DataSource 사용, JdbcUtils.close() 사용
  */
 @Slf4j
 public class MemberRepositoryV1 {
@@ -117,6 +117,9 @@ public class MemberRepositoryV1 {
         JdbcUtils.closeConnection(con);
     }
 
+    /**
+     * dataSource 통해 커넥션 획득!
+     */
     private Connection getConnection() throws SQLException {
         Connection con = dataSource.getConnection();
         log.info("get connection={}, class={}", con, con.getClass());

@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * 기본 동작, 트랜잭션이 없어서 문제 발생
+ * 기본 동작, 트랜잭션(롤백)이 없어서 문제 발생
  */
 class MemberServiceV1Test {
     public static final String MEMBER_A = "memberA";
@@ -27,7 +27,7 @@ class MemberServiceV1Test {
 
     @BeforeEach
     void before() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
+        DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD); //스프링이 제공하는 DriveManager
         memberRepository = new MemberRepositoryV1(dataSource);
         memberService = new MemberServiceV1(memberRepository);
     }
