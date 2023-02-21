@@ -18,6 +18,12 @@ import java.util.Random;
 
 import static hello.jdbc.connection.ConnectionConst.*;
 
+/**
+ * 데이터 접근 예외 직접 만들기
+ * <p>
+ * ex) 중복 키 에러 복구 시도
+ * 문제: DB 종류마다 에러 키 번호가 다 다름 (e.getErrorCode() == 23505)
+ */
 public class ExTranslatorV1Test {
     Repository repository;
     Service service;
