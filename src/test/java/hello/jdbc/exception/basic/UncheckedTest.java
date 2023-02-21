@@ -57,6 +57,9 @@ public class UncheckedTest {
         }
     }
 
+    /**
+     * throws 생략가능!
+     */
     static class Repository {
         public void call() {
             throw new MyUncheckedException("ex");
