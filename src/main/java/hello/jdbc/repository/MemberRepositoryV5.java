@@ -9,8 +9,8 @@ import javax.sql.DataSource;
 
 /**
  * JdbcTemplate 사용
- * 반복적인 코드 삭제
- * getConnection, CloseConnection 다 처리해줌!
+ * 반복적인 코드 삭제 (템플릿 콜백 패턴)
+ * "트랜잭션을 위한 커넥션 동기화(getConnection, CloseConnection) + 스프링 예외 변환기" 모두 자동으로 실행해줌!
  */
 @Slf4j
 public class MemberRepositoryV5 implements MemberRepository {
