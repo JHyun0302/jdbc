@@ -16,6 +16,9 @@ public class UnCheckedAppTest {
         assertThatThrownBy(() -> controller.request()).isInstanceOf(RuntimeException.class);
     }
 
+    /**
+     * 예외 포함과 스택 트레이스
+     */
     @Test
     void printEx() {
         Controller controller = new Controller();
@@ -27,6 +30,10 @@ public class UnCheckedAppTest {
         }
     }
 
+    /**
+     * Service, Controller 에서 throws checked Exception 사라짐!
+     * 의존하지 않음!
+     */
     static class Controller {
         Service service = new Service();
 
