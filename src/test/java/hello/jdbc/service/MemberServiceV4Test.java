@@ -2,7 +2,7 @@ package hello.jdbc.service;
 
 import hello.jdbc.domain.Member;
 import hello.jdbc.repository.MemberRepository;
-import hello.jdbc.repository.MemberRepositoryV5;
+import hello.jdbc.repository.MemberRepositoryV4_2;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,39 +31,33 @@ class MemberServiceV4Test {
     public static final String MEMBER_B = "memberB";
     public static final String MEMBER_EX = "ex";
     @Autowired
-    private MemberRepository memberRepository;
+    private MemberRepository memberRepository; //인터페이스
     @Autowired
     private MemberServiceV4 memberService;
-
-    @TestConfiguration
-    static class TestConfig {
-        @Autowired
-        private DataSource dataSource;
-
-        /*
-        private final DataSource dataSource;
-        TestConfig(DataSource dataSource) {
-            this.dataSource = dataSource;
-        }*/
-
-        @Bean
-        MemberRepository memberRepository() {
-//            return new MemberRepositoryV4_1(dataSource);
-//            return new MemberRepositoryV4_2(dataSource);
-            return new MemberRepositoryV5(dataSource);
-        }
-
-        @Bean
-        MemberServiceV4 memberServiceV4() {
-            return new MemberServiceV4(memberRepository());
-        }
-    }
 
     @AfterEach
     void after() {
         memberRepository.delete(MEMBER_A);
         memberRepository.delete(MEMBER_B);
         memberRepository.delete(MEMBER_EX);
+    }
+
+    @TestConfiguration
+    static class TestConfig {
+        @Autowired
+        private DataSource dataSource;
+
+        @Bean
+        MemberRepository memberRepository() {
+//            return new MemberRepositoryV4_1(dataSource);
+            return new MemberRepositoryV4_2(dataSource);
+//            return new MemberRepositoryV5(dataSource);
+        }
+
+        @Bean
+        MemberServiceV4 memberServiceV4() {
+            return new MemberServiceV4(memberRepository());
+        }
     }
 
     @Test

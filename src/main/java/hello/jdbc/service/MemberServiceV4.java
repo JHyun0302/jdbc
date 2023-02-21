@@ -6,14 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 예외 누수 문제 해결
- * SQLException 제거
+ * 예외 누수 문제 해결- SQLException 제거
  * <p>
  * MemberRepository 인터페이스 의존
  */
 @Slf4j
 public class MemberServiceV4 {
-    private final MemberRepository memberRepository;
+    private final MemberRepository memberRepository; //인터페이스 의존
 
     public MemberServiceV4(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
@@ -25,7 +24,7 @@ public class MemberServiceV4 {
         bizLogic(fromId, toId, money); //비지니스 로직
     }
 
-    private void bizLogic(String fromId, String toId, int money) {
+    private void bizLogic(String fromId, String toId, int money) { //throws SQLException
         Member fromMember = memberRepository.findById(fromId);
         Member toMember = memberRepository.findById(toId);
 
