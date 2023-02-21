@@ -16,6 +16,9 @@ import java.sql.SQLException;
 import static hello.jdbc.connection.ConnectionConst.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 스프링이 제공하는 예외 변환기: 오류 코드를 스프링이 정의한 예외로 자동으로 변환해주는 변환기
+ */
 @Slf4j
 public class SpringExceptionTranslatorTest {
     DataSource dataSource;
@@ -25,6 +28,9 @@ public class SpringExceptionTranslatorTest {
         dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
     }
 
+    /**
+     * SQL 에러: 직접 번호를 매칭시켜줘야함!(현실성 없음)
+     */
     @Test
     void sqlExceptionErrorCode() {
         String sql = "select bad grammar";
@@ -40,7 +46,7 @@ public class SpringExceptionTranslatorTest {
     }
 
     /**
-     * 스프링이 제공하는 SQL 예외 변환기 (일관된 예외 추상화 가능)
+     * 스프링이 제공하는 SQL 예외 변환기 (일관된 예외 추상화 가능) - SQLErrorCodeSQLExceptionTranslator
      * 적절한 스프링 데이터 접근 계층의 예외로 변환해서 반환해줌
      */
     @Test
